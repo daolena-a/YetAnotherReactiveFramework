@@ -6,6 +6,7 @@ import com.yet.another.reactive.framework.pool.Initializer;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,12 +22,12 @@ public class NodeFuture <T,E>{
     TreeFuture root;
     Class<CallableData<T,E>> callableClass;
     List<NodeFuture<?,E>> next;
-    List<NodeFuture<?,T>> linkNext;
+    List<NodeFuture<?,Future<T>>> linkNext;
     boolean waitResultBeforeCallingNext = false;
     CallableDataPool<CallableData<T,E>> pool;
 
-    public NodeFuture(TreeFuture root, Class<CallableData<T, E>> callableClass, List<NodeFuture<?, E>> next, boolean waitResultBeforeCallingNext, Initializer<CallableData<T,E>> _init) {
-        this.root = root;
+    public NodeFuture( Class<CallableData<T, E>> callableClass, List<NodeFuture<?, E>> next, boolean waitResultBeforeCallingNext, Initializer<CallableData<T,E>> _init) {
+
         this.callableClass = callableClass;
         this.next = next;
         this.waitResultBeforeCallingNext = waitResultBeforeCallingNext;
@@ -56,16 +57,26 @@ public class NodeFuture <T,E>{
             callNextNode(elem);
         }
     }
+
+    public void executeLink(E elem){
+        CallableData callableData = pool.getCallable();
+        callableData.acceptData(elem);
+        Future res = root.getExecutor().submit(callableData);
+        if(linkNext != null && linkNext.size()>0){
+            callNextNodeLinked(res);
+        }
+    }
+
     public void callNextNode(E elem){
 
         next.forEach((task)-> {
            task.execute(elem);
         });
     }
-    public void callNextNodeLinked(T elem){
+    public void callNextNodeLinked(Future<T> _future){
 
-        linkNext.forEach((task)-> {
-            task.execute(elem);
+        linkNext.forEach((task) -> {
+            task.executeLink(_future);
         });
     }
 

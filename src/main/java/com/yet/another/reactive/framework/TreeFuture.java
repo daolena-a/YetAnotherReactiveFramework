@@ -23,7 +23,7 @@ public class TreeFuture<E> {
     }
 
     public void submit(E newData){
-        root.acceptData(newData);
+        root.execute(newData);
     }
     public ExecutorService getExecutor(){
         return executor;
