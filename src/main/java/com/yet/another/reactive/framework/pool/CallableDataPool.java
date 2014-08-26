@@ -29,7 +29,9 @@ public class CallableDataPool<T extends CallableData<?,?>> {
         for(int i =0 ; i < poolSize; i++){
             try {
                 T val = clazz.newInstance();
-                initializer.init(val);
+                if(initializer != null){
+                    initializer.init(val);
+                }
                 references.put(i,val);
                 dataQueue.add(val);
                 count ++;

@@ -31,6 +31,7 @@ public class NodeFuture <T,E>{
 
         this.callableClass = callableClass;
         this.next = new ArrayList<>();
+        linkNext = new ArrayList<>();
         this.waitResultBeforeCallingNext = waitResultBeforeCallingNext;
         pool = new CallableDataPool<CallableData<T, E>>(callableClass,100,_init);
     }
@@ -61,9 +62,12 @@ public class NodeFuture <T,E>{
     public void execute(E elem){
         CallableData callableData = pool.getCallable();
         callableData.acceptData(elem);
-        root.getExecutor().submit(callableData);
+        Future<T> res=  root.getExecutor().submit(callableData);
         if(next != null && next.size()>0){
             callNextNode(elem);
+        }
+        if(linkNext != null && linkNext.size()>0){
+            callNextNodeLinked(res);
         }
     }
 
