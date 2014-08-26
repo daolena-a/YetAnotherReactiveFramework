@@ -43,7 +43,7 @@ public class CallableDataPool<T extends CallableData<?,?>> {
 
     Class<T> clazz;
     int poolSize;
-    ConcurrentLinkedQueue<T> dataQueue;
+    ConcurrentLinkedQueue<T> dataQueue = new ConcurrentLinkedQueue<>();
 
     public CallableData<?,?> getCallable(){
           CallableData<?,?> val =  dataQueue.poll();

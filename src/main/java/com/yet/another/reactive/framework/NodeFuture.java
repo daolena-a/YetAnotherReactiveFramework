@@ -3,6 +3,7 @@ package com.yet.another.reactive.framework;
 import com.yet.another.reactive.framework.pool.CallableDataPool;
 import com.yet.another.reactive.framework.pool.Initializer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.Callable;
@@ -26,10 +27,10 @@ public class NodeFuture <T,E>{
     boolean waitResultBeforeCallingNext = false;
     CallableDataPool<CallableData<T,E>> pool;
 
-    public NodeFuture( Class<CallableData<T, E>> callableClass, List<NodeFuture<?, E>> next, boolean waitResultBeforeCallingNext, Initializer<CallableData<T,E>> _init) {
+    public NodeFuture( Class<CallableData<T, E>> callableClass,  boolean waitResultBeforeCallingNext, Initializer<CallableData<T,E>> _init) {
 
         this.callableClass = callableClass;
-        this.next = next;
+        this.next = new ArrayList<>();
         this.waitResultBeforeCallingNext = waitResultBeforeCallingNext;
         pool = new CallableDataPool<CallableData<T, E>>(callableClass,100,_init);
     }
@@ -40,6 +41,14 @@ public class NodeFuture <T,E>{
 
     public void setNext(List<NodeFuture<?, E>> next) {
         this.next = next;
+    }
+
+    public List<NodeFuture<?, Future<T>>> getLinkNext() {
+        return linkNext;
+    }
+
+    public void setLinkNext(List<NodeFuture<?, Future<T>>> linkNext) {
+        this.linkNext = linkNext;
     }
 
     public TreeFuture getRoot() {
