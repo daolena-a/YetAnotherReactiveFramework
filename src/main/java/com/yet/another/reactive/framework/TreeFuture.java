@@ -17,7 +17,7 @@ public class TreeFuture<E> {
         root = rootNode;
         root.setRoot(this);
     }
-    public TreeFuture(int poolSize,NodeFuture<?,E> rootNode){
+    public TreeFuture(NodeFuture<?,E> rootNode,int poolSize){
         this(rootNode);
         executor = Executors.newFixedThreadPool(poolSize);
 
@@ -37,4 +37,6 @@ public class TreeFuture<E> {
     public void setRoot(NodeFuture<?, E> root) {
         this.root = root;
     }
+
+
 }

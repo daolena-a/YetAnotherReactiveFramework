@@ -41,7 +41,7 @@ public class Counter extends CallableData<Integer,String> {
                    i++;
                }
         }
-        System.out.println("char "+charToCount+ " "+i);
+        System.out.println(Thread.currentThread().getName()+" char "+charToCount+ " "+i);
         return i;
     }
 }

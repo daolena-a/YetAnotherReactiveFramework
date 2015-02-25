@@ -14,12 +14,13 @@ import java.util.concurrent.Future;
  * User: Adrien
  * Date: 14/08/14
  * Time: 21:51
- * To change this template use File | Settings | File Templates.
+ *
  */
 //T type return by the callable
 // E event inected in the callable
 
 public class NodeFuture <T,E>{
+
     TreeFuture root;
     Class<CallableData<T,E>> callableClass;
     List<NodeFuture<?,E>> next;

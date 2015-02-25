@@ -48,11 +48,23 @@ public class CallableDataPool<T extends CallableData<?,?>> {
     ConcurrentLinkedQueue<T> dataQueue = new ConcurrentLinkedQueue<>();
 
     public CallableData<?,?> getCallable(){
-          CallableData<?,?> val =  dataQueue.poll();
-        if(val == null){
-            return addValue();
-
+//          CallableData<?,?> val =  dataQueue.poll();
+//        if(val == null){
+//            return addValue();
+//
+//        }
+//        return val;
+        T val = null;
+        try{
+            val = clazz.newInstance();
+            if(initializer != null) {
+                initializer.init(val);
+            }
         }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
         return val;
 
     }
@@ -62,13 +74,16 @@ public class CallableDataPool<T extends CallableData<?,?>> {
         try {
             val = clazz.newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
-        initializer.init(val);
-        references.put(count,val);
-        count++;
+        if(initializer != null){
+            initializer.init(val);
+            references.put(count,val);
+            count++;
+
+        }
         return val;
     }
 

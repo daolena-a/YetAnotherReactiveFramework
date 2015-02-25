@@ -23,7 +23,7 @@ public class DisplayCallable extends CallableData<Void,Future<Integer>> {
 
     @Override
     public Void call() throws Exception {
-        System.out.println("taktak le link"+display.get());
+        System.out.println("link using the previous node value"+display.get());
         return null;
     }
 }
