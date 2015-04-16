@@ -3,11 +3,11 @@ package com.yet.another.reactive.framework;
 import java.util.concurrent.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Adrien
+ *
+ * User: adao-lena
  * Date: 14/08/14
  * Time: 21:51
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class TreeFuture<E> {
     private ExecutorService executor;

@@ -16,11 +16,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
- * Created with IntelliJ IDEA.
+ *
  * User: adao-lena
  * Date: 26/08/14
  * Time: 14:04
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class Test {
     public static void main(String[] args) {

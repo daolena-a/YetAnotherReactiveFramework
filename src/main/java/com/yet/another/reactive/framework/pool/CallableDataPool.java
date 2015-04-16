@@ -8,11 +8,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Adrien
+ *
+ * User: adao-lena
  * Date: 14/08/14
  * Time: 23:19
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class CallableDataPool<T extends CallableData<?,?>> {
     private Initializer<T> initializer;
@@ -48,12 +48,7 @@ public class CallableDataPool<T extends CallableData<?,?>> {
     ConcurrentLinkedQueue<T> dataQueue = new ConcurrentLinkedQueue<>();
 
     public CallableData<?,?> getCallable(){
-//          CallableData<?,?> val =  dataQueue.poll();
-//        if(val == null){
-//            return addValue();
-//
-//        }
-//        return val;
+
         T val = null;
         try{
             val = clazz.newInstance();

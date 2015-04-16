@@ -1,14 +1,14 @@
 package com.yet.another.reactive.framework;
 
 /**
- * Created with IntelliJ IDEA.
+ *
  * User: adao-lena
  * Date: 26/08/14
  * Time: 14:25
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class Counter extends CallableData<Integer,String> {
-    Character charToCount;
+     Character charToCount;
      String data;
 
     public Counter() {
@@ -16,12 +16,13 @@ public class Counter extends CallableData<Integer,String> {
     }
 
     @Override
-    public void acceptData(String elem) {
+    public void getData(String elem) {
+
         data = elem;
     }
 
     @Override
-    public void reset() {
+    public void resetData() {
         data = null;
     }
 

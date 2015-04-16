@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.concurrent.Future;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Adrien
+ *
+ * User: adao-lena
  * Date: 15/08/14
  * Time: 21:22
- * To change this template use File | Settings | File Templates.
  */
 public class NodeBuilder<T,E> {
     NodeFuture local;

@@ -6,11 +6,10 @@ import com.yet.another.reactive.framework.TreeFuture;
 import com.yet.another.reactive.framework.pool.Initializer;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Adrien
+ * User: adao-lena
  * Date: 15/08/14
  * Time: 21:18
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class Builder<T,E> {
     TreeFuture<E> tree;

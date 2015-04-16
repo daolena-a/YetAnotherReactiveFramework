@@ -10,8 +10,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Adrien
+ *
+ * User: adao-lena
  * Date: 14/08/14
  * Time: 21:51
  *
